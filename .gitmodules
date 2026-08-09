@@ -1,0 +1,3 @@
+[submodule "themes/floral-cities"]
+	path = themes/floral-cities
+	url = https://github.com/fractuscontext/floral-cities.git

@@ -1,0 +1,54 @@
+relativeURLs: false
+canonifyURLs: false
+locale: "en-au"
+title: "R. Mutt Furnishings"
+theme: "floral-cities"
+
+pagination:
+  pagerSize: 5
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+    extensions:
+      typographer:
+        disable: true
+      passthrough:
+        enable: true
+        delimiters:
+          block:
+            - ['\[', '\]']
+            - ["$$", "$$"]
+          inline:
+            - ['\(', '\)']
+            - ["$", "$"]
+  highlight:
+    noClasses: false
+
+params:
+  enableNoJsDarkMode: true
+  images:
+    - "images/favicon-highres-social.jpg"
+  retro_footer:
+    separator_image: "images/cat_separator.gif"
+    lines:
+      - "Except where otherwise noted,"
+      - "content on this site is licensed under a <a href='https://creativecommons.org'>CC BY-SA 4.0 license</a>"
+      - ""
+      - "Questions? See <a href='/about/'>About</a> page"
+      - ""
+      - "Blog powered by Hugo, <a href='https://github.com/fractuscontext/floral-cities'> floral-cities</a> as the theme."
+    badges:
+      - image: "https://jigsaw.w3.org/css-validator/images/vcss"
+        alt: "Valid CSS!"
+        url: "https://jigsaw.w3.org/css-validator/check/referer"
+      - image: images/macos_mov.gif
+        alt: "Made with Mac"
+      - image: images/anythingbut.gif
+        alt: "Anything but Chrome"
+      - image: images/www2.gif
+        alt: "World-wide Web"
+      - image: images/pride_flag.gif
+        alt: "RAINBOW FLAG"
+        url: "https://www.amnesty.org/en/what-we-do/discrimination/lgbti-rights/"
