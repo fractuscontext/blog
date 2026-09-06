@@ -2,7 +2,7 @@
 title: "Modern Concurrency is black magic btw"
 description: "The Illusion of Free Concurrency: The Math, Memory, and Mechanics of M:N Threading"
 date: 2026-08-25
-draft: false
+draft: true
 ---
 
 Every few months, a developer discovers lightweight concurrency, sees a benchmark showing **1,000,000 concurrent tasks**, and immediately asks:

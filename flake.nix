@@ -64,7 +64,7 @@
 
           # Local dev server script
           run-local-server = pkgs.writeShellScriptBin "run-local-server" ''
-            hugo server -DF --noHTTPCache -s "${siteDir}" --disableFastRender
+            hugo server -DF --noHTTPCache -s "${siteDir}" --disableFastRender --baseURL http://localhost:1313/
           '';
 
           # Build script for GitHub Actions
