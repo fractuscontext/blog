@@ -2,6 +2,7 @@
 title: "Jack of All Trades, Master of None"
 description: "Why building software in general feels soul-draining in the post-LLM era"
 date: 2026-11-09
+lastmod: 2026-11-18
 draft: false
 ---
 
@@ -59,7 +60,7 @@ Even before LLMs were widely used, people in 2023 were already saying [the inter
 
 Today, it seems to be a problem of "delivery": content used to exist because someone had something to express, and now content exists to be delivered. One obvious example is MrBeast, whose channel we all know is [engineered around retention metrics](https://web.archive.org/web/20250304014547/https://simonwillison.net/2024/Sep/15/how-to-succeed-in-mrbeast-production/), and the videos [don't even make money themselves](https://web.archive.org/web/20250321051727/https://fortune.com/2025/03/11/youtube-biggest-star-mrbeast-makes-more-money-chocolate-videos); they're the pipeline that sells the chocolate. They aren't there to say anything; the purpose of each video is to keep the (monetisation/fake productivity) pipeline running.
 
-I don't like the word "LARP", but ever since TikTok became a thing, its use has exploded. We also live in an upside-down world where advocates, indie hackers, and scientists with actual passion get called "LARPers" for everything they say, while actual LARPers become Key Opinion Leaders, much like a bully I know who somehow rebranded as a thought leader for gym content and an advocate for sexual abuse survivors.
+I don't like the word "LARP". We used to just call someone "pretentious" or "full of crap", but ever since TikTok took over, it’s become a knee-jerk insult for anyone, genuine or not. We now live in an upside-down world where advocates, indie hackers, and scientists with actual passion get called "LARPers" for everything they say, while actual LARPers become Key Opinion Leaders, much like a bully I know who somehow rebranded as a thought leader for gym content and an advocate for sexual abuse survivors.
 
 ## AI and writing
 
@@ -67,11 +68,11 @@ AI also kills the joy in writing when you are neurodivergent: you have a lot to 
 
 While that messy nonlinear jumping indeed makes writing interesting and authentic, I think AI-assisted writing can keep it, while entirely AI-generated writing obviously cannot.
 
-I spent 3 hours writing this; without AI, it would have taken 8 hours, since organising scattered sentences into one coherent paragraph and expanding text to avoid slippery slopes are hard [(some research supports this)](https://journals.sagepub.com/doi/full/10.24384/rbe3-k236).
+I wrote every single sentence of this writing, AI's sole role was to cut and reorder my scattered thoughts into coherent paragraphs and iron out slippery slopes. That editing process is notoriously hard ([some research supports this](https://journals.sagepub.com/doi/full/10.24384/rbe3-k236)), and using AI trimmed an 8-hour job down to 3.
 
-A "second brain" sounds cringe, and it is cringe in practice, because you get nothing out of it except flashy interconnected nodes, a TikTok larping video, and an over-engineered grocery list [(from video: second brain cringelords by Eric Morrison)](https://www.youtube.com/watch?v=6NukGtwJb7Y). You burn tokens for useless stuff, and it [actively works against your brain](https://arxiv.org/abs/2506.08872), since [actively recalling and reflecting on what you know](https://doi.org/10.1111/j.1467-9280.2006.01693.x) is what makes memories stick, and [offloading it all to a vault](https://www.science.org/doi/10.1126/science.1207745) skips exactly that.
+A "second brain" sounds cringe, and it is cringe in practice, because you get nothing out of it except flashy interconnected nodes, a TikTok larping video, and an over-engineered grocery list [(from video: second brain cringelords by Eric Morrison)](https://www.youtube.com/watch?v=6NukGtwJb7Y). You burn tokens for useless stuff, and it [works against your brain](https://arxiv.org/abs/2506.08872), since [actively recalling and reflecting on what you know](https://doi.org/10.1111/j.1467-9280.2006.01693.x) is what makes memories stick, and [offloading it all to a vault](https://www.science.org/doi/10.1126/science.1207745) skips exactly that.
 
-The thing here is we definitely want to work with our brain, not work against it. Instead of a second brain, you can record your own raw rants, set up a simple RAG to query them, and write a long, not-very-necessary reflection on why you thought that way later (just like this article). If you need a grocery list, you just need a grocery list, not a "second brain".
+The thing here is we definitely want to work with our brain, not work against it. Instead of a second brain, you can record your own raw rants, set up a simple RAG to query them, and write a long, "somewhat necessary" reflection on why we thought that way later (just like this article). If you need a grocery list, you just need a grocery list, not a "second brain".
 
 ## Where AI actually impressed me
 
@@ -79,14 +80,14 @@ Last week was the very first week I actually tried MCP.
 
 I'd been quite impressed by all these "using Claude to create animation" products:
 
-- The good ones: [lemo-opuscar](https://github.com/lemomo-ai/lemo-opuscar)
-- The bad ones: slop clones of Fern [(from video: The Death of Educational Content on YouTube)](https://www.youtube.com/watch?v=-Gnrp_caPvo)
+- The good ones: [lemo-opuscar - Github](https://github.com/lemomo-ai/lemo-opuscar)
+- The bad ones: [AI Slop clones of Fern (from video: The Death of Educational Content on YouTube)](https://www.youtube.com/watch?v=-Gnrp_caPvo)
 
 Regardless of what people made, I was quite impressed and shocked.
 
 Back then, I didn't use MCP because setting up all that stuff sounded tedious. Just think about all these fancy words: MCP, Harness, Hermes agent, Skills. In hindsight, those words are full of crap; they're literally just prompts and JSON-RPC.
 
-The straw that broke the camel's back was not having enough time to finish an assignment that needed a [wireframe](https://frame0.app), which finally forced me to try [MCP](https://web.archive.org/web/20260307021612/https://docs.frame0.app/ai-assistant/). Seeing Claude Code directly control the OS and apps was genuinely impressive, and also scary, considering Claude Code can write directly to your filesystem via a Node.js CJS script.
+The straw that broke the camel's back was not having enough time to finish an assignment that needed a wireframe, which finally forced me to try [MCP](https://web.archive.org/web/20260307021612/https://docs.frame0.app/ai-assistant/). Seeing Claude Code directly control the OS and [app](https://frame0.app) was genuinely impressive, and also scary, considering Claude Code can write directly to your filesystem via a Node.js CJS script.
 
 Controlling the UI is impressive because, as we all know, LLMs render images in tiles, and Claude wasn't natively multimodal back then (it is now). Even today, Claude Opus still has a hard time recognising Choromatsu, the monkey from the Sony Walkman ad, if online search is disabled.
 
@@ -96,22 +97,28 @@ Every single race towards AI is simultaneously a race to the top and a race to t
 
 Either way, it is going to hit a hard wall within a few years, both computationally and sociologically.
 
-The computational hard limit is the easiest problem to spot, best summed up by that recent Sam Altman quote everyone memed on:
+The computational hard limit is the easiest problem to spot, best summed up by that [recent Sam Altman quote everyone memed on](https://web.archive.org/web/20261101043042/https://cheekypint.substack.com/p/why-sam-altman-is-against-a-single):
 
 > "From a global allocation perspective, actually, it's quite terrible to have everybody, like, have a bunch of the world's limited supply of DRAM sitting in their own computer. And being used five percent of the time."
 
 The sociological hard limit is the one I actually want to talk about. AI is trained on human data, and mind you, 44% of Australians aged 15 to 74 read at literacy Level 2 or below (a low level), while 38% read at Level 3 ([ABS PIAAC 2011-12](https://www.abs.gov.au/statistics/people/education/programme-international-assessment-adult-competencies-australia/latest-release)).
 
-Those literacy numbers somewhat explain what happened when I asked Claude to write me an email disputing a room cleanliness claim. The first line Claude output was "I deny your claim", followed by "I've completed [responsibilities] with meticulous attention", and then it kept vomiting statutes.
+With a baseline like that, an AI trying to sound "competent" defaults to slightly better than the median human, giving you dressed-up Reddit arguments rather than sound reasoning.
 
-Ironically, "most" statutes were correctly referenced. Whether or not you're a law major (which I'm not), the more statutes you cite, the more likely you are to misrepresent one. Yet the email missed the one thing that needs no law degree: propositional logic.
+This "median-default" explains what happened when I asked Claude to write an email disputing a room cleanliness claim. The first line Claude output was "I deny your claim", followed by "I've completed [responsibilities] with meticulous attention", and then it kept vomiting statutes.
 
-Most humans conflate "I deny your claim" with "Your claim isn't sufficient, and I note and disagree with what you have said", and an AI trained on human writing seemed to behaviour-match what most panicked renters or TV dramas would say.
+Ironically, "most" statutes were correctly referenced (not all), as I can tell, from an admin-law lay advocate perspective. I'm not going to lecture everyone "oh you should argue natural justice before statutes" since I'm not a law major, and doing so might violate unqualified-practice laws in many countries, e.g. South Australia's Legal Practitioners Act 1981.
+
+Whether or not you're a law major, the more statutes you cite, the more you claim, the more likely you are to misrepresent or stumble on one. Yet the email missed the one thing that needs no law degree: propositional logic.
+
+If you claim "I deny $X$, and I did $Y$ with meticulous attention", the entire statement's truth value collapses the moment they find one minor flaw in $Y$.
+
+Most humans conflate "I deny your claim" with "Your claim lacks sufficient basis [...] and I disagree", and an AI trained on human writing simply behaviour-matched what panicked renters or TV dramas would say.
 
 ## Still a lot to talk about
 
-This article was titled this way because I originally wanted to talk about why building software has been so soul-draining for me lately, and what I would be doing now if I hadn't picked Software Engineering in the first place. Psychology? Sociology? Law?
+This article was titled this way because I originally wanted to talk about why building software has been so soul-draining for me lately, and would I be better off picking psychology or sociology or even law as my major back then?
 
-There is a lot more to talk about. Again, as I mentioned earlier, I spent about 3.5 hours writing this article. I wrote every single sentence, and AI's sole role was to cut and reorder them into something coherent.
+I can't believe that back then I had to do all of this by myself. Even though AI helped cut and reorder my sentences, this piece is still mine, I typed 90% of the characters with my own fingers, and the messy jumps are all me.
 
-I can't believe that back then I had to do all of this by myself. Maybe the difference is the whole point: AI-assisted writing keeps the messy jumps that make the writing mine, while entirely AI-generated writing can't.
+I hope this [story](https://web.archive.org/web/20241113040951/https://theguardianfoundation.org/assets/files/behind-the-headlines-types-of-stories-june-2024.pdf) is more entertaining and less bloated than your average Linkedin AI-generated post.
