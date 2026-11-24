@@ -1,0 +1,157 @@
+// One row per field. Each row names the probe key to read for every column;
+// null means the column does not apply to that field and stays empty.
+//   ch:  page Client Hints (navigator.userAgentData), shown in the navigator column
+//   nav: page navigator
+//   sw:  service worker navigator
+//   hw:  hardware measured by cpuProbe() in avx-probe.js
+const ROWS = [
+  { label: 'user agent',       ch: 'chBrands',          nav: 'userAgent', sw: 'userAgent', hw: null },
+  { label: 'platform',         ch: 'chPlatform',        nav: 'platform',  sw: 'platform',  hw: null },
+  { label: 'platform version', ch: 'chPlatformVersion', nav: null,        sw: null,        hw: null },
+  { label: 'architecture',     ch: 'chArchitecture',    nav: null,        sw: null,        hw: 'isa' },
+  { label: 'bitness',          ch: 'chBitness',         nav: null,        sw: null,        hw: null },
+  { label: 'CPU cores',        ch: null,                nav: 'cores',     sw: 'cores',     hw: null },
+  { label: 'FMA',              ch: null,                nav: null,        sw: null,        hw: 'fusedMadd' },
+  { label: 'relaxed SIMD',     ch: null,                nav: null,        sw: null,        hw: 'relaxedSimd' },
+  { label: 'CPU',              ch: null,                nav: null,        sw: null,        hw: 'inferred' },
+  { label: 'errors',           ch: null,                nav: 'error',     sw: 'error',     hw: null, hideWhenEmpty: true },
+];
+
+const $ = id => document.getElementById(id);
+
+function show(key, v) {
+  if (v === undefined || v === null || v === '') return '-';
+  if (typeof v === 'boolean') return v ? 'yes' : 'no';
+  if (key === 'isa') return v === 'arm' ? 'ARM' : v;
+  return String(v);
+}
+
+// page: probe result from the page. sw: probe result from the service worker, or null.
+function render(page, sw) {
+  // The hardware does not depend on the scope, so one measurement is enough:
+  // the service worker's when it has replied, otherwise the page's.
+  const hw = sw || page;
+
+  const table = $('results');  // the <tbody> holding the probe rows
+  table.replaceChildren();
+
+  const head = table.insertRow();
+  for (const text of ['', 'navigator', 'Service Worker', 'WASM']) {
+    const th = document.createElement('th');
+    th.textContent = text;
+    head.appendChild(th);
+  }
+
+  for (const row of ROWS) {
+    if (row.hideWhenEmpty && show(row.nav, page[row.nav]) === '-' && (!sw || show(row.sw, sw[row.sw]) === '-')) continue;
+
+    const tr = table.insertRow();
+    const th = document.createElement('th');
+    th.align = 'left';
+    th.textContent = row.label;
+    tr.appendChild(th);
+
+    // navigator cell: the plain navigator value, plus the Client Hints value on its own line.
+    const navLines = [];
+    if (row.nav) navLines.push(show(row.nav, page[row.nav]));
+    if (row.ch) navLines.push('Client Hints: ' + show(row.ch, page[row.ch]));
+    const navCell = tr.insertCell();
+    navCell.style.whiteSpace = 'pre-line';
+    navCell.textContent = navLines.join('\n');
+
+    // Service worker cell: blank until the worker replies, flagged when it disagrees with the page.
+    let swText = '';
+    if (row.sw && sw) {
+      swText = show(row.sw, sw[row.sw]);
+      if (row.nav && row.sw !== 'error' && swText !== show(row.nav, page[row.nav])) swText += ' (differs - more accurate)';
+    }
+    tr.insertCell().textContent = swText;
+
+    tr.insertCell().textContent = row.hw ? show(row.hw, hw[row.hw]) : '';
+  }
+}
+
+// Page-side probe.
+let pageData = null;
+const pageResult = cpuProbe().then(r => {
+  pageData = r;
+  render(r, null);
+  return r;
+});
+
+// Service worker probe. Only asks the worker that controls this page,
+// so an old or not-yet-active worker never answers with stale values.
+let probeRun = 0;
+
+function runSwProbe() {
+  const run = ++probeRun;
+  const controller = navigator.serviceWorker.controller;
+
+  if (!controller) {
+    $('probe-status').textContent = 'Not run. The service worker does not control this page; use the Reload page button.';
+    if (pageData) render(pageData, null);
+    return;
+  }
+
+  $('probe-status').textContent = 'Running...';
+
+  const swResult = new Promise((resolve, reject) => {
+    const timer = setTimeout(
+      () => reject(new Error('No reply. An older sw.js may still be in control; reload the page.')),
+      5000
+    );
+    const channel = new MessageChannel();
+    channel.port1.onmessage = event => {
+      clearTimeout(timer);
+      resolve(event.data);
+    };
+    controller.postMessage('probe', [channel.port2]);
+  });
+
+  Promise.all([pageResult, swResult]).then(([page, sw]) => {
+    if (run !== probeRun) return;  // A newer run has started; skip stale output.
+    $('probe-status').textContent = '✓ Done.';
+    render(page, sw);
+    console.log('Page probe:', page);
+    console.log('Service worker probe:', sw);
+  }).catch(err => {
+    if (run !== probeRun) return;
+    $('probe-status').textContent = '✗ ' + err.message;
+    pageResult.then(page => render(page, null));
+  });
+}
+
+// A hard reload (Ctrl+Shift+R) loads the page without its service worker even when
+// that worker is already active, so an active registration with no controller means a hard reload.
+function reportStatus() {
+  if (navigator.serviceWorker.controller) {
+    $('status').textContent = '✓ Controlling this page. The page can load offline.';
+    return;
+  }
+  navigator.serviceWorker.getRegistration().then(reg => {
+    if (navigator.serviceWorker.controller) return;  // Control arrived in the meantime.
+    $('status').textContent = reg && reg.active
+      ? 'Active, but bypassed by a hard reload (Ctrl+Shift+R). Use the Reload page button.'
+      : 'Registered, not controlling this page yet. Use the Reload page button.';
+  });
+}
+
+$('reload').addEventListener('click', () => location.reload());
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').then(() => {
+    reportStatus();
+    runSwProbe();
+    // clients.claim() in sw.js can take control without a reload; probe again when that happens.
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      reportStatus();
+      runSwProbe();
+    });
+  }).catch(err => {
+    $('status').textContent = '✗ Registration failed: ' + err.message;
+    $('probe-status').textContent = 'Not run.';
+  });
+} else {
+  $('status').textContent = '✗ Not supported here (HTTPS or localhost required).';
+  $('probe-status').textContent = 'Not run.';
+}

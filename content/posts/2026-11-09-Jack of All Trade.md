@@ -16,7 +16,7 @@ People keep saying you should learn for fun and you shouldn't set a target for y
 
 People say a target kills joy. Let's take an inappropriate analogy here: for a trans woman, thinking about voice training can kill the joy, because the voice is a target she has to reach. For a femboy, the same voice practice doesn't make "him" dread anything, because the voice is play, not a target.
 
-As a software engineering student, I find homelabbing and DevOps more fun than the usual side projects. That isn't traditional, since most programmers find building silly stuff like [porting Doom into a PDF](https://github.com/ading2210/doompdf) or building snake games more enjoyable.
+As a software engineering student, I find homelabbing and DevOps more fun than the usual side projects. That isn't traditional, since most programmers find building silly stuff like [porting Doom into a PDF](https://github.com/ading2210/doompdf) or making another Snake more enjoyable.
 
 For example, I have a project where I [build Wine on macOS using Nix](https://github.com/fractuscontext/nix-macOS_Wine_builds), because there are no Wine builds for macOS in nixpkgs and I'm afraid of supply chain attacks in community binaries. It's quite a fun project, because I learned how to deal with build systems, like runtime dependencies and Justfiles, along the way.
 
@@ -58,7 +58,7 @@ AI is quite impressive here because I don't think any human would have thought o
 
 Even before LLMs were widely used, people in 2023 were already saying [the internet isn't fun anymore](https://web.archive.org/web/20231010032842/https://www.newyorker.com/culture/infinite-scroll/why-the-internet-isnt-fun-anymore). In terms of content, Web 1.0 (and early Web 2.0) was about expressing yourself (or Broadcast Yourself): GeoCities websites, Annoying Orange.
 
-Today, it seems to be a problem of "delivery": content used to exist because someone had something to express, and now content exists to be delivered. One obvious example is MrBeast, whose channel we all know is [engineered around retention metrics](https://web.archive.org/web/20250304014547/https://simonwillison.net/2024/Sep/15/how-to-succeed-in-mrbeast-production/), and the videos [don't even make money themselves](https://web.archive.org/web/20250321051727/https://fortune.com/2025/03/11/youtube-biggest-star-mrbeast-makes-more-money-chocolate-videos); they're the pipeline that sells the chocolate. They aren't there to say anything; the purpose of each video is to keep the (monetisation/fake productivity) pipeline running.
+We live in a society of delivery, where content no longer exists because someone has something to express or it's fun to make, but simply to be distributed and consumed. Look at how MrBeast grew: his channel is now [engineered around retention metrics](https://web.archive.org/web/20250304014547/https://simonwillison.net/2024/Sep/15/how-to-succeed-in-mrbeast-production/), yet the videos [don't even turn a profit on their own](https://web.archive.org/web/20250321051727/https://fortune.com/2025/03/11/youtube-biggest-star-mrbeast-makes-more-money-chocolate-videos). These videos exist not because making them is fun or he has something to say, but solely to serve a monetisation pipeline, with nothing to do with our real lives beyond consumption. At bottom, it is the 2026 version of tittytainment.
 
 I don't like the word "LARP". We used to just call someone "pretentious" or "full of crap", but ever since TikTok took over, it’s become a knee-jerk insult for anyone, genuine or not. We now live in an upside-down world where advocates, indie hackers, and scientists with actual passion get called "LARPers" for everything they say, while actual LARPers become Key Opinion Leaders, much like a bully I know who somehow rebranded as a thought leader for gym content and an advocate for sexual abuse survivors.
 
@@ -70,15 +70,13 @@ While that messy nonlinear jumping indeed makes writing interesting and authenti
 
 I wrote every single sentence of this writing, AI's sole role was to cut and reorder my scattered thoughts into coherent paragraphs and iron out slippery slopes. That editing process is notoriously hard ([some research supports this](https://journals.sagepub.com/doi/full/10.24384/rbe3-k236)), and using AI trimmed an 8-hour job down to 3.
 
-A "second brain" sounds cringe, and it is cringe in practice, because you get nothing out of it except flashy interconnected nodes, a TikTok larping video, and an over-engineered grocery list [(from video: second brain cringelords by Eric Morrison)](https://www.youtube.com/watch?v=6NukGtwJb7Y). You burn tokens for useless stuff, and it [works against your brain](https://arxiv.org/abs/2506.08872), since [actively recalling and reflecting on what you know](https://doi.org/10.1111/j.1467-9280.2006.01693.x) is what makes memories stick, and [offloading it all to a vault](https://www.science.org/doi/10.1126/science.1207745) skips exactly that.
+A "second brain" sounds cringe, and it is cringe in practice, because you get nothing out of it except flashy interconnected nodes, a TikTok larping video, and an over-engineered grocery list [(from video: second brain cringelords by Eric Morrison)](https://www.youtube.com/watch?v=6NukGtwJb7Y). You burn tokens for useless stuff, and it [works against your brain](https://arxiv.org/abs/2506.08872), since [actively recalling and reflecting on what you know](https://doi.org/10.1111/j.1467-9280.2006.01693.x) is what makes memories stick.
 
 The thing here is we definitely want to work with our brain, not work against it. Instead of a second brain, you can record your own raw rants, set up a simple RAG to query them, and write a long, "somewhat necessary" reflection on why we thought that way later (just like this article). If you need a grocery list, you just need a grocery list, not a "second brain".
 
 ## Where AI actually impressed me
 
-Last week was the very first week I actually tried MCP.
-
-I'd been quite impressed by all these "using Claude to create animation" products:
+Last week was the very first week I actually tried MCP, and before that, I've been quite impressed by all these "using Claude to create animation" products:
 
 - The good ones: [lemo-opuscar - Github](https://github.com/lemomo-ai/lemo-opuscar)
 - The bad ones: [AI Slop clones of Fern (from video: The Death of Educational Content on YouTube)](https://www.youtube.com/watch?v=-Gnrp_caPvo)
