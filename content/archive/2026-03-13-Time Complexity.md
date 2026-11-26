@@ -1,7 +1,9 @@
 ---
 title: "DSA basics: What is Time Complexity & RA Machine"
+author:
+  name: "Claire Tam"
+  url: "/about/"
 date: 2026-03-13 21:00:00
-author: '@fractuscontext'
 reuse: "CC BY-SA"
 tags: []
 ---

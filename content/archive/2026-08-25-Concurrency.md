@@ -1,5 +1,8 @@
 ---
 title: "Modern Concurrency is black magic btw"
+author:
+  name: "Claire Tam"
+  url: "/about/"
 description: "The Illusion of Free Concurrency: The Math, Memory, and Mechanics of M:N Threading"
 date: 2026-08-25
 draft: true

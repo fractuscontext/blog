@@ -102,7 +102,7 @@
     return new Blob([...chunks, ...central, end.buffer], { type: 'application/zip' });
   }
 
-  // Folder of the current page, e.g. "/posts/relaxed-simd/".
+  // Folder of the current page, e.g. "/archive/relaxed-simd/".
   const pageDir = new URL('./', location.href);
 
   // Files shipped next to index.html in the zip.

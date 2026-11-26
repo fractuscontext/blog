@@ -1,5 +1,8 @@
 ---
 title: "Probability of Bird Poop"
+author:
+  name: "Claire Tam"
+  url: "/about/"
 description: "The Probability of Bird Poop, Transgender Infinity Buttons, and the 153 IQ Nigerian Prince"
 date: 2026-08-20
 draft: false

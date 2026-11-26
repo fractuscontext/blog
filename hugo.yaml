@@ -5,7 +5,17 @@ title: "R. Mutt Furnishings"
 theme: "floral-cities"
 
 pagination:
-  pagerSize: 5
+  pagerSize: 20
+
+# Replaces the theme's menu (Home / Posts)
+menus:
+  main:
+    - name: Home
+      pageRef: /
+      weight: 10
+    - name: Writings
+      pageRef: /archive
+      weight: 20
 
 markup:
   goldmark:
@@ -27,6 +37,12 @@ markup:
     noClasses: false
 
 params:
+  # The blog section (drives the tags bar on its list page)
+  mainSections: ["archive"]
+  # Licence card at the end of each post: fallbacks for posts that don't set
+  # `author` / `license` in front matter (see themes/floral-cities/layouts/_partials/copyright.html).
+  # Set `author:` in each post's front matter (or here, as a fallback).
+  license: "CC BY-SA 4.0" # links to its SPDX page; use {name, url} for a custom link
   enableNoJsDarkMode: true
   images:
     - "images/favicon-highres-social.jpg"

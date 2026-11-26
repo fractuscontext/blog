@@ -1,5 +1,4 @@
 **/public/
 test-site/themes
-*/output
+**/output
 .pre-commit-config.yaml
-.direnv

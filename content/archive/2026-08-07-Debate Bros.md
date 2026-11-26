@@ -1,5 +1,8 @@
 ---
 title: "Arguing with Charlie Kirk Debate-Bros"
+author:
+  name: "Claire Tam"
+  url: "/about/"
 date: 2026-08-07
 draft: true
 description: "A psychological breakdown of the rhetorical traps, deflections, and gaslighting used by bad-faith debaters to dismiss systemic bias, and a practical guide on how to shut them down."

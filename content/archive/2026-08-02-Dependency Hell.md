@@ -1,5 +1,8 @@
 ---
 title: "A letter from 1764: Dependency Hell"
+author:
+  name: "Claire Tam"
+  url: "/about/"
 description: "A Dutch merchant in 1764 attempts to gather the ingredients for a miraculous new curative called a 'Sandwich', only to discover the true horrors of dependency hell."
 date: 2026-08-02
 draft: false
