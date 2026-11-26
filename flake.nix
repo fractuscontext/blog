@@ -1,5 +1,5 @@
 {
-  description = "Hugo development and build environment for GitHub Pages";
+  description = "Floral Cities Hugo theme: dev shell, linters and GitHub Pages build";
 
   inputs = {
     nixpkgs.url = "git+https://github.com/nixos/nixpkgs?shallow=1&ref=nixpkgs-unstable";
@@ -16,79 +16,73 @@
       git-hooks,
     }:
     let
-      allSystems = [
+      systems = [
         "x86_64-linux"
         "aarch64-linux"
         "aarch64-darwin"
       ];
-      forAllSystems = nixpkgs.lib.genAttrs allSystems;
+      forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
     in
     {
-      checks = forAllSystems (
-        system:
-        let
-          pkgs = nixpkgs.legacyPackages.${system};
-        in
-        {
-          pre-commit-check = git-hooks.lib.${system}.run {
-            src = ./.;
-            hooks = {
-              nixfmt = {
-                enable = true;
-              };
+      formatter = forAllSystems (pkgs: pkgs.nixfmt);
 
-              rumdl = {
-                enable = true;
-                name = "Markdown Lint Check (rumdl)";
-                entry = "${pkgs.rumdl}/bin/rumdl check";
-                types = [ "markdown" ];
-                pass_filenames = false;
-              };
-
-              reuse = {
-                enable = true;
-                name = "SPDX License Check";
-                entry = "${pkgs.reuse}/bin/reuse lint";
-                pass_filenames = false;
-              };
+      checks = forAllSystems (pkgs: {
+        pre-commit-check = git-hooks.lib.${pkgs.stdenv.hostPlatform.system}.run {
+          src = ./.;
+          hooks = {
+            nixfmt.enable = true;
+            rumdl = {
+              enable = true;
+              name = "Markdown lint (rumdl)";
+              entry = "${pkgs.rumdl}/bin/rumdl check";
+              types = [ "markdown" ];
+              pass_filenames = false;
+            };
+            reuse = {
+              enable = true;
+              name = "REUSE licence check";
+              entry = "${pkgs.reuse}/bin/reuse lint";
+              pass_filenames = false;
+            };
+            djlint = {
+              enable = true;
+              name = "Go template lint (djlint)";
+              entry = "${pkgs.djlint}/bin/djlint --profile=golang --lint --ignore=H021";
+              files = "\\.html$";
             };
           };
-        }
-      );
+        };
+      });
 
       devShells = forAllSystems (
-        system:
+        pkgs:
         let
-          siteDir = "$(pwd)/";
-          pkgs = nixpkgs.legacyPackages.${system};
-
-          # Local dev server script
-          run-local-server = pkgs.writeShellScriptBin "run-local-server" ''
-            hugo server -DF --noHTTPCache -s "${siteDir}" --disableFastRender --baseURL http://localhost:1313/
+          run-local-server =  pkgs.writeShellScriptBin "run-local-server" ''
+            exec ${pkgs.hugo}/bin/hugo server -DF --noHTTPCache --disableFastRender \
+              -s "$site" --baseURL http://localhost/ "$@"
           '';
 
-          # Build script for GitHub Actions
-          build-github-pages = pkgs.writeShellScriptBin "build-github-pages" ''
-            hugo -F --gc --minify -s "${siteDir}" -d "${siteDir}/output" "$@"
+          # Used by .github/workflows/deploy-pages.yml; pass -b <baseURL>
+          build-github-pages =  pkgs.writeShellScriptBin "build-github-pages" ''
+            exec ${pkgs.hugo}/bin/hugo -F --gc --minify -s "$site" -d "$site/output" "$@"
           '';
+
+          pre-commit = self.checks.${pkgs.stdenv.hostPlatform.system}.pre-commit-check;
         in
         {
-          default = pkgs.mkShell {
-            # Make hugo and our custom scripts available in the shell
-            packages = with pkgs; [
-              go
-              reuse
-              hugo
-              rumdl
+          default = pkgs.mkShellNoCC {
+            packages = [
+              pkgs.hugo
+              pkgs.reuse
+              pkgs.rumdl
+              pkgs.djlint
+              pkgs.nixfmt
               run-local-server
               build-github-pages
             ];
-
-            # Path hijacking and symlink creation
             shellHook = ''
-              ${self.checks.${system}.pre-commit-check.shellHook}
-              echo "Setting up Hugo theme symlink..."
-              echo "Nix shell ready! Use 'run-local-server' to test locally."
+              ${pre-commit.shellHook}
+              echo "Floral Cities shell ready: run-local-server, build-github-pages"
             '';
           };
         }

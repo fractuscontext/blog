@@ -1,5 +1,8 @@
 ---
 title: "Jack of All Trades, Master of None"
+author:
+  name: "Claire Tam"
+  url: "/about/"
 description: "Why building software in general feels soul-draining in the post-LLM era"
 date: 2026-11-09
 lastmod: 2026-11-18

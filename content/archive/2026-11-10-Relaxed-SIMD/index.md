@@ -1,11 +1,13 @@
 ---
 title: "Probing CPU & real UA via Relaxed SIMD & Service Worker"
+author:
+  name: "Claire Tam"
+  url: "/about/"
 description: "How Service Worker & WASM reveal a spoofed user agent and the CPU architecture when Canvas and WebGL are turned off."
 date: 2026-11-10
 lastmod: 2026-11-24
 draft: false
-author: 'claire2026t@posteo.net'
-reuse: "CC BY-SA"
+reuse: "MIT"
 tags: [privacy, demo]
 ---
 
