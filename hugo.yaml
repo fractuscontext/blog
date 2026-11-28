@@ -16,6 +16,9 @@ menus:
     - name: Writings
       pageRef: /archive
       weight: 20
+    - name: "About"
+      pageRef: '/about'
+      weight: 30
 
 markup:
   goldmark:
